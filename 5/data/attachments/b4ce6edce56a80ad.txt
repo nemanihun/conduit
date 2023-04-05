@@ -1,0 +1,38 @@
+TestCase 04 - Adatkezelési nyilatkozat használata
+
+TestCase 04 - Adatkezelési nyilatkozat használata teszteset elindult
+
+Test step 1
+
+Megvizsgálom, megjelenik-e a cookie használatról tájékoztató
+
+Elvárt eredmény: Megjelenik az oldalon cookie használatról tájékoztató.
+
+Aktuális eredmény: "Cookie bar" látszik ezzel a tartalommal: 
+ We use cookies to ensure you get the best experience on our website. Learn More...
+
+Test step 2
+
+Megvizsgálom, megjelenik-e a "cookie bar"-on a cookiek elfogadását szolgáló gomb
+
+Elvárt eredmény: Megjelenik a "cookie bar"-on a cookiek elfogadását szolgáló gomb.
+
+Aktuális eredmény: Megjelenik a "cookie bar"-on a cookiek elfogadását szolgáló gomb ezzel a felirattal: I accept!
+
+Test step 3
+
+Megvizsgálom, megjelenik-e a "cookie bar"-on a cookiek visszautasítását szolgáló gomb
+
+Elvárt eredmény: Megjelenik a "cookie bar"-on a cookiek visszautasítását szolgáló gomb.
+
+Aktuális eredmény: Megjelenik a "cookie bar"-on a cookiek visszautasítását szolgáló gomb ezzel a felirattal: I decline!
+
+Test step 4
+
+Megvizsgálom, a I accept! feliratú gombra kattintva mi történik
+
+Elvárt eredmény: A gombra kattintás után eltűnik a "cookie_bar".
+
+Rákattintok, a I accept! feliratú gombra
+
+Aktuális eredmény: Eltűnt a "cookie_bar".
