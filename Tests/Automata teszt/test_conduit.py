@@ -22,7 +22,7 @@ class TestConduit(object):
     def setup_method(self):
         self.browser = config.get_preconfigured_chrome_driver()
         self.browser.get(adatok.Urls.home_url)
-        time.sleep(5)
+        time.sleep(10)
 
     def teardown_method(self):
         self.browser.quit()
@@ -47,7 +47,7 @@ class TestConduit(object):
         testcase1.teszt_nev()
         testcase1.teszt_start()
 
-        getusers.signup(self.browser, 'user4')
+        getusers.signup(self.browser, 'user1')
         WebDriverWait(self.browser, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
 
