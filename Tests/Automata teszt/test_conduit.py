@@ -76,7 +76,7 @@ class TestConduit(object):
         testcase2.teszt_nev()
         testcase2.teszt_start()
 
-        getusers.signin(self.browser, 'user2')
+        getusers.signin(self.browser, 'user1')
 
         WebDriverWait(self.browser, 5).until((EC.url_to_be(adatok.Urls.home_url)))
 
@@ -105,7 +105,7 @@ class TestConduit(object):
         testcase3.teszt_nev()
         testcase3.teszt_start()
 
-        getusers.signin(self.browser, 'user2')
+        getusers.signin(self.browser, 'user1')
 
         WebDriverWait(self.browser, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
