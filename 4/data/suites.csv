@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"broken","Wed Apr 05 19:40:19 GMT 2023","Wed Apr 05 19:40:19 GMT 2023","0","Tests.Automata teszt","test_conduit","TestConduit","","","test_cookie_handling",""
+"broken","Wed Apr 05 19:40:18 GMT 2023","Wed Apr 05 19:40:18 GMT 2023","0","Tests.Automata teszt","test_conduit","TestConduit","","","test_logout",""
+"broken","Wed Apr 05 19:40:17 GMT 2023","Wed Apr 05 19:40:17 GMT 2023","0","Tests.Automata teszt","test_conduit","TestConduit","","","test_signin",""
+"broken","Wed Apr 05 19:40:15 GMT 2023","Wed Apr 05 19:40:15 GMT 2023","0","Tests.Automata teszt","test_conduit","TestConduit","","","test_signup",""
