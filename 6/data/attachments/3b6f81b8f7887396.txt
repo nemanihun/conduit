@@ -1,6 +1,0 @@
-TestCase 03 - Kijelentkezés
-
-TestCase 03 - Kijelentkezés teszteset elindult
-
-Bejelentkezési adatok megadása
-Bejelentkezési adatok: Email cím: user2@gmail.com, Jelszó: Teszt2023#
