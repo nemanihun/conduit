@@ -1,0 +1,8 @@
+ATC 01 - Regisztráció
+Regisztrációs adatok megadása
+Bejelentkezési adatok: Felhasználó név: user1test20230313, Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Teszt eset eredményének vizsgálata
+
+Elvárt eredmény: Sikeres regisztráció után látszik az "Ok" gomb
+

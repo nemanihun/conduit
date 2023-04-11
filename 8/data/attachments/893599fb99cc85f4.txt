@@ -1,0 +1,13 @@
+ATC 03 - Kijelentkezés
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Teszt eset eredményének vizsgálata
+
+Elvárt eredmény: Sikeres kijelentkezés után látszik a "Sign in" gomb
+
+ATC 03 - Kijelentkezés teszteset sikeresen lefutott
+
+Aktuális eredmény:  Sikeres kijelentkezés, látszik a "Sign in" gomb

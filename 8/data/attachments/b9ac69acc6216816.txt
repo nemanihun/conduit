@@ -1,0 +1,8 @@
+ATC 08 - Adat módosítása/Cikk módosítása
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Megkeresem a módosítandó cikket.
+

@@ -1,0 +1,8 @@
+ATC 09 - Adat törlése/Cikk törlése
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Megkeresem a törlendő cikket.
+
