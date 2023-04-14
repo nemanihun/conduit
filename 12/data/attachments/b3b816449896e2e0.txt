@@ -1,7 +1,0 @@
-
-ATC 09 - Új adat bevitele
-
-
-Bejelentkezem az alkalmazásba
-
-Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
