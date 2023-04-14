@@ -215,7 +215,7 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        article = 'article1_data'
+        article = 'article2_data'
 
         print()
         print('ATC 08 - Adat módosítása/Cikk módosítása')
