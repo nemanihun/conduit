@@ -254,7 +254,7 @@ class ManipulatePages:
     def article_table_reading(self):
         article_list = []
 
-        with open('hirek.csv', 'r', encoding='UTF-8') as file:
+        with open('Tests/Automata teszt/hirek.csv', 'r', encoding='UTF-8') as file:
             article_table = csv.reader(file, delimiter=';')
 
             for row in article_table:
