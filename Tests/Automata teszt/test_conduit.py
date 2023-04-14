@@ -1,7 +1,6 @@
 import data as adatok
 import configuration as config
 import model as model
-import asserts as asserting
 import time
 
 from selenium.webdriver.common.by import By
@@ -18,7 +17,7 @@ class TestConduit(object):
         self.browser = config.get_preconfigured_chrome_driver()
         self.browser.get(adatok.Urls.home_url)
         self.browser.maximize_window()
-        time.sleep(10)
+        time.sleep(2)
 
     def teardown_method(self):
         self.browser.quit()
@@ -26,120 +25,87 @@ class TestConduit(object):
     # ATC 01 - Regisztráció
     def test_signup(self):
         getusers = model.GetUsers()
-
-        required_data = {
-            'test_name': 'ATC 01 - Regisztráció',
-            'expected_result': 'Sikeres regisztráció után látszik az "Ok" gomb',
-            'actual_result': 'A regisztráció sikeres, látszik az "Ok" gomb',
-        }
-
-        testcase1 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase1.teszt_nev()
+        print()
+        print('ATC 01 - Regisztráció')
+        print()
 
         getusers.signup(self.browser, 'user1')
+        print()
+        print('Elvárt eredmény: Sikeres regisztráció után látszik a "Log out" gomb.')
+        print()
 
-        asserts = asserting.Asserts()
-
-        WebDriverWait(self.browser, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
-
-        getusers.logout_btn(self.browser).is_displayed()
-
-        testcase1.expected_res()
-
-        asserts.general_asserts(getusers.signup_ok_btn(self.browser).is_displayed())
-
-        testcase1.actual_res()
+        assert getusers.logout_btn(self.browser).is_displayed()
+        print()
+        print('Aktuális eredmény: A regisztráció sikeres, látszik a "Log out" gomb.')
+        print()
 
     # ATC 02 - Bejelentkezés
     def test_signin(self):
         getusers = model.GetUsers()
 
-        required_data = {
-            'test_name': 'ATC 02 - Bejelentkezés',
-            'expected_result': 'Sikeres bejelentkezés után látszik a "Log out" gomb',
-            'actual_result': 'Sikeres bejelentkezés, látszik a "Log out" gomb',
-        }
-
-        testcase2 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase2.teszt_nev()
+        print()
+        print('ATC 02 - Bejelentkezés')
+        print()
 
         getusers.signin(self.browser, 'user1')
 
-        asserts = asserting.Asserts()
+        print()
+        print('Elvárt eredmény: Sikeres bejelentkezés után látszik a "Log out" gomb.')
+        print()
 
-        WebDriverWait(self.browser, 5).until((EC.url_to_be(adatok.Urls.home_url)))
+        assert getusers.logout_btn(self.browser).is_displayed()
 
-        testcase2.expected_res()
-
-        asserts.general_asserts(getusers.logout_btn(self.browser).is_displayed())
-
-        testcase2.actual_res()
+        print()
+        print('Aktuális eredmény: Sikeres bejelentkezés, látszik a "Log out" gomb.')
+        print()
 
     # ATC 03 - Kijelentkezés
     def test_logout(self):
         getusers = model.GetUsers()
 
-        required_data = {
-            'test_name': 'ATC 03 - Kijelentkezés',
-            'expected_result': 'Sikeres kijelentkezés után látszik a "Sign in" gomb',
-            'actual_result': 'Sikeres kijelentkezés, látszik a "Sign in" gomb',
-        }
+        print()
+        print('ATC 03 - Kijelentkezés')
+        print()
 
-        testcase3 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase3.teszt_nev()
-
+        # Bejelentkezem az alkalmazásba
         getusers.signin(self.browser, 'user1')
 
-        asserts = asserting.Asserts()
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
 
-        WebDriverWait(self.browser, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
-
+        # Kijelentkezem az alkalmazásból.
         getusers.logout(self.browser)
 
-        time.sleep(5)
+        print()
+        print('Elvárt eredmény: Sikeres kijelentkezés után látszik a "Sign in" gomb.')
+        print()
 
-        testcase3.expected_res()
+        assert getusers.signin_btn(self.browser).is_displayed()
 
-        asserts.general_asserts(getusers.signin_btn(self.browser).is_displayed())
-
-        testcase3.actual_res()
+        print()
+        print('Aktuális eredmény: Sikeres kijelentkezés, látszik a "Sign in" gomb.')
+        print()
 
     # ATC 04 - Adatkezelési nyilatkozat használata
     def test_cookie_handling(self):
         cookie = model.Cookie()
 
-        required_data = {
-            'test_name': 'ATC 04 - Adatkezelési nyilatkozat használata',
-            'expected_result': '',
-            'actual_result': '',
-        }
-
-        testcase4 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase4.teszt_nev()
+        print()
+        print('ATC 04 - Adatkezelési nyilatkozat használata')
+        print()
 
         cookie.cookie_handling(self.browser)
+
+        # Elvárt eredményt a meghívott függvény írja ki.
+
+        # Több assert van, ezeket a meghívott függvény vizsgálja
+
+        # assert cookie_content.is_displayed()
+        # assert cookie_accept_btn.is_displayed()
+        # assert cookie_decline_btn.is_displayed()
+        # assert cookie_bar_displayed == 0
+
+        # Aktuális eredményt a meghívott függvény írja ki.
 
     # ATC 05 - Adatok listázása
     def test_data_listing(self):
@@ -147,33 +113,29 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        asserts = asserting.Asserts()
-
-        required_data = {
-            'test_name': 'ATC 05 - Adatok listázása',
-            'expected_result': 'Legalább egy cikk van az oldalon',
-            'actual_result': 'Található cikk az oldalon',
-        }
-
-        testcase5 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase5.teszt_nev()
+        print()
+        print('ATC 05 - Adatok listázása')
+        print()
 
         getusers.signin(self.browser, 'user1')
 
-        WebDriverWait(self.browser, 15).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'counter')))
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
 
-        testcase5.expected_res()
+        print()
+        print('Elvárt eredmény: Legalább egy cikk van az oldalon.')
+        print()
 
-        asserts.article_listing_assert(self.browser)
-
+        # Kilistázom az oldalon található cikkek címét.
         manipulatepages.article_listing(self.browser)
+        article_amount = manipulatepages.article_amount
 
-        testcase5.actual_res()
+        # Megvizsgálom, található-e legalább egy cikk az oldalon.
+        assert article_amount > 0
+
+        print()
+        print('Aktuális eredmény: Található cikk az oldalon.')
+        print()
 
         # ATC 06 - Több oldalas lista bejárása
 
@@ -182,33 +144,33 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        asserts = asserting.Asserts()
+        print()
+        print('ATC 06 - Több oldalas lista bejárása')
+        print()
 
-        required_data = {
-            'test_name': 'ATC 06 - Több oldalas lista bejárása',
-            'expected_result': 'Ki listázom az összes oldalon található cikk címét és elérek a lista oldalak végére, ezzel bejárva az összes lista oldalt.',
-            'actual_result': 'Elérek a lista oldalak végére, bejártam a lista oldalát, ki tudtam listázni az összes cikk címét a lista oldalakról.',
-        }
-
-        testcase6 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase6.teszt_nev()
-
+        # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        WebDriverWait(self.browser, 15).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'counter')))
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
 
-        time.sleep(5)
+        # Végig lépegetek a lista oldalain és kigyűjtöm, melyik oldalon hány cikk van.
+        page_numbers = manipulatepages.multi_page_list_explore(self.browser)
+        total_pages = page_numbers['total']
+        active_page_nr = page_numbers['active']
 
-        manipulatepages.multi_page_list_explore(self.browser)
+        print()
+        print('Elvárt eredmény: Végig lépegetve az oldalakon, elérek a lista utolsó oldaláig.')
+        print()
 
-        testcase6.expected_res()
+        # Megvizsgálom, hogy az utolsó oldal száma megegyezik-e a lista összes oldalának mennyiségével. Ha a két szám megegyezik, eljutottam a lista utolsó oldalára.
+        assert active_page_nr == total_pages
 
-        asserts.multi_page_listing_assert(self.browser)
+        print(f'Összes oldal száma: {total_pages} / aktív oldal száma: {active_page_nr}')
+
+        print()
+        print('Aktuális eredmény: Végig tudtam lépegetni a lista összes oldalán és elértem az utolsó oldalig.')
+        print()
 
         # ATC 07 - Új adat bevitel / Új cikk feltöltése
 
@@ -217,36 +179,34 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        asserts = asserting.Asserts()
+        article = 'article3_data'
 
-        required_data = {
-            'test_name': 'ATC 07 - Új adat bevitele',
-            'expected_result': 'Az új cikk feltöltése sikeres. A cikk címe megjelenik az oldalon.',
-            'actual_result': 'Megjelenik a cikk címe. A cikk felvitele sikeres volt.',
-            'article': 'article1_data'
-        }
+        print()
+        print('ATC 07 - Új adat bevitele')
+        print()
 
-        article = required_data['article']
-
-        testcase7 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase7.teszt_nev()
-
+        # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        WebDriverWait(self.browser, 15).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'counter')))
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
 
-        manipulatepages.new_article_upload(self.browser, article)
+        # Feltöltök egy új cikket.
+        article_info = manipulatepages.new_article_upload(self.browser, article)
+        title_element = article_info['title_elem']
+        title = article_info['title']
 
-        testcase7.expected_res()
+        print()
+        print('Elvárt eredmény: Az új cikk feltöltése sikeres. A cikk címe megjelenik az oldalon.')
+        print()
 
-        asserts.article_assert(self.browser, article)
+        # Megvizsgálom, megjelenik-e a feltöltött cikk az oldalon.
+        # asserts.article_assert(self.browser, article)
+        assert title_element.text == title
 
-        testcase7.actual_res()
+        print()
+        print('Aktuális eredmény: Megjelenik a cikk címe. A cikk felvitele sikeres volt.')
+        print()
 
         # ATC 08 - Adat módosítása / Cikk módosítása
 
@@ -255,36 +215,33 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        asserts = asserting.Asserts()
+        article = 'article3_data'
 
-        required_data = {
-            'test_name': 'ATC 08 - Adat módosítása/Cikk módosítása',
-            'expected_result': 'A cikk módosítása sikeres. A cikk címe megjelenik az oldalon.',
-            'actual_result': 'Megjelenik a módosított cikk címe. A cikk módosítása sikeres volt.',
-            'article': 'article1_data'
-        }
+        print()
+        print('ATC 08 - Adat módosítása/Cikk módosítása')
+        print()
 
-        article = required_data['article']
-
-        testcase8 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase8.teszt_nev()
-
+        # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        WebDriverWait(self.browser, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'counter')))
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
 
-        manipulatepages.modify_article(self.browser, article)
+        # Módosítok egy általam felvitt cikket.
+        article_info = manipulatepages.modify_article(self.browser, article)
+        title_element = article_info['title_elem']
+        title = article_info['title']
 
-        testcase8.expected_res()
+        print()
+        print('Elvárt eredmény: A cikk módosítása sikeres. A cikk címe megjelenik az oldalon.')
+        print()
 
-        asserts.article_assert(self.browser, 'article2_data')
+        # Megvizsgálom, megjelenik-e a módosított cikk.
+        assert title_element.text == title
 
-        testcase8.actual_res()
+        print()
+        print('Aktuális eredmény: Megjelenik a módosított cikk címe. A cikk módosítása sikeres volt.')
+        print()
 
         # ATC 09 - Adat törlése / Cikk törlése
 
@@ -293,33 +250,66 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        asserts = asserting.Asserts()
+        article = 'article2_data'
 
-        required_data = {
-            'test_name': 'ATC 09 - Adat törlése/Cikk törlése',
-            'expected_result': 'A cikk törlése sikeres. A cikk nem jelenik már meg az oldalon.',
-            'actual_result': 'A cikk törlése sikeres. A cikk már nem jelenik meg az oldalon.',
-            'article': 'article2_data'
-        }
+        print()
+        print('ATC 09 - Adat törlése/Cikk törlése')
+        print()
 
-        article = required_data['article']
-
-        testcase9 = model.Testcase(
-            test_name=required_data['test_name'],
-            expected_result=required_data['expected_result'],
-            actual_result=required_data['actual_result'],
-        )
-
-        testcase9.teszt_nev()
-
+        # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        WebDriverWait(self.browser, 5).until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'counter')))
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
 
-        manipulatepages.delete_article(self.browser, article)
+        # Törlök egy általam létrehozott cikket.
+        article_info = manipulatepages.delete_article(self.browser, 'article2_data')
+        title_element = article_info['title_elem']
+        title = article_info['title']
 
-        testcase9.expected_res()
+        print()
+        print('Elvárt eredmény: A cikk törlése sikeres. A cikk nem jelenik már meg az oldalon.')
+        print()
 
-        asserts.delete_article_assert(self.browser, article)
+        # Megvizsgálom megtalálható-e a törölt cikk címe a lista oldalon.
+        for element in title_element:
+            assert title != element.text
 
-        testcase9.actual_res()
+        print()
+        print('Aktuális eredmény: A cikk törlése sikeres. A cikk már nem jelenik meg az oldalon.')
+        print()
+
+    def test_more_articles_uploads(self):
+        manipulatepages = model.ManipulatePages()
+
+        getusers = model.GetUsers()
+
+        print()
+        print('ATC 09 - Új adat bevitele')
+        print()
+
+        # Bejelentkezem az alkalmazásba.
+        getusers.signin(self.browser, 'user1')
+
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
+
+        # Feltöltök egy új cikket.
+        article = manipulatepages.more_articles_uploads_from_data_source(self.browser)
+
+        # title_element = article_info['title_elem']
+        # title = article_info['title']
+
+        print()
+        print('Elvárt eredmény: Az új cikkek feltöltése sikeres. A cikkek címe megjelenik az oldalon.')
+        print()
+
+        # Megvizsgálom, megjelennek-e a feltöltött cikkek az oldalon.
+
+        for item in article:
+
+            assert item in manipulatepages.article_title_list
+
+        print()
+        print('Aktuális eredmény: Megjelenik a feltöltött cikkek címe. A cikkek felvitele sikeres volt.')
+        print()

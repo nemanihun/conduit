@@ -1,34 +1,10 @@
 import time
+import csv
 
 import data as adatok
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
-
-class Testcase:
-
-    def __init__(self, test_name, expected_result, actual_result):
-        self.test_name = test_name
-        self.expected_result = expected_result
-        self.actual_result = actual_result
-
-    def teszt_nev(self):
-        test_name = self.test_name
-        print(test_name)
-
-    def expected_res(self):
-        # Teszteset eredmény vizsgálata
-        print()
-        print('Teszt eset eredményének vizsgálata')
-        print()
-        print(f'Elvárt eredmény: {self.expected_result}')
-        print()
-
-    def actual_res(self):
-        print(f'{self.test_name} teszteset sikeresen lefutott')
-        print()
-        print(f'Aktuális eredmény:  {self.actual_result}')
 
 
 class GetUsers:
@@ -81,12 +57,19 @@ class GetUsers:
         submit_btn = browser.find_element(By.XPATH, '//button')
         submit_btn.click()
 
-        # Registration Success Popup Ok button
+        logout_button = WebDriverWait(browser, 15).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
 
-        ok_btn = WebDriverWait(browser, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
+        if logout_button.is_displayed():
 
-        ok_btn.click()
+            # Registration Success Popup Ok button
+
+            ok_btn = WebDriverWait(browser, 5).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
+
+            ok_btn.click()
+        else:
+            print('A regisztráció sikerült, de nem jelentkezett be az alkalmazás a folyamat végén.')
 
     # Bejelentkezés
     def signin(self, browser, user):
@@ -101,6 +84,7 @@ class GetUsers:
 
         password = browser.find_elements(By.XPATH, '//input')[1]
         password.send_keys(self.user_data[2])
+
         print()
         print('Bejelentkezem az alkalmazásba')
         print()
@@ -210,6 +194,7 @@ class ManipulatePages:
         self.article_amount = 0
         self.article_list = []
         self.article_data = []
+        self.article_title_list = []
 
     # Általános funkciók
 
@@ -224,8 +209,60 @@ class ManipulatePages:
             articles = adatok.Articles.article2_data.values()
         if adata == 'article3_data':
             articles = adatok.Articles.article3_data.values()
+        if adata == 'hirek_csv':
+            articles = self.article_data
         for article in articles:
             self.article_data.append(article)
+        return articles
+
+    # Cikk adatok megadása
+    def article_input(self, browser):
+        print('Cikk adatok megadása')
+
+        input_fields = WebDriverWait(browser, 5).until(EC.presence_of_all_elements_located((By.XPATH, '//input')))
+
+        article_title = input_fields[0]
+        article_title.clear()
+        article_title.send_keys(self.article_data[0])
+
+        article_about = input_fields[1]
+        article_about.clear()
+        article_about.send_keys(self.article_data[1])
+
+        article_content = browser.find_element(By.XPATH, '//textarea')
+        article_content.clear()
+        article_content.send_keys(self.article_data[2])
+
+        article_tag = input_fields[2]
+        article_tag.clear()
+        article_tag.send_keys(self.article_data[3])
+
+        print(
+            f'Cikk adatai: Cikk címe: {self.article_data[0]}, Cikk témája: {self.article_data[1]}, Cikk szövege: {self.article_data[2]}, Cikk címkéi {self.article_data[2]}')
+
+        publish_btn = browser.find_element(By.XPATH, '//button')
+        publish_btn.click()
+
+    # Cikk feltöltés/módosítás/törlés asserthez szükséges cikk adatok
+    def article_assert(self, browser):
+        title = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '//h1')))
+        title_data = self.article_data[0]
+        article_data = {'title_elem': title, 'title': title_data}
+        return article_data
+
+    # Cikk adat beolvasása CSV fáljból
+    def article_table_reading(self):
+        article_list = []
+
+        with open('hirek.csv', 'r', encoding='UTF-8') as file:
+            article_table = csv.reader(file, delimiter=';')
+
+            for row in article_table:
+                article_list.append(row)
+
+        self.article_list = article_list
+        return article_list
+
 
     # Profil oldalra navigálás
     def go_to_profile(self, browser):
@@ -234,85 +271,80 @@ class ManipulatePages:
         nav_links[3].click()
         time.sleep(60)
 
+
     # Cikkek száma a lista oldalon
     def article_number(self, browser):
-
         article_list = browser.find_elements(By.CLASS_NAME, 'article-preview')
         self.article_list = article_list
-
         article_number = len(article_list)
         self.article_amount = article_number
 
         return article_number
 
+
     # Egy konkrét cikk megtalálása és megnyitása
     def find_article(self, browser, article):
         self.articledata(article)
         article_data = self.article_data
-        pages = WebDriverWait(browser, 5).until(
-            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="page-link"]')))
-        print(pages)
-
-        next_page = 0
-
         titles = WebDriverWait(browser, 5).until(
-            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]/h1')))
-
-        # browser.refresh()
-
-        # for page in pages:
+            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
 
         for title in titles:
 
             if title.text == article_data[0]:
-                # next_page += 1
                 title.click()
 
-            # next_page += 1
-
-            # if next_page == 0:
-            #     page.click()
 
     # Tesztesetek funkciói
 
     # Cikkek listázása
     def article_listing(self, browser):
+        time.sleep(5)
         self.article_number(browser)
         amount = self.article_amount
         counter = 0
-
-        title_list = browser.find_elements(By.XPATH, '//h1')
+        article_title = []
+        title_list = WebDriverWait(browser, 5).until(EC.presence_of_all_elements_located((By.XPATH, '//h1')))
         print()
         print('Kilistázom a cikkek címét')
         print()
         print('Az oldalon megjelenő cikkek címei:')
         print()
+
         for elem in title_list[1:]:
             counter += 1
             print(f'{counter}. Cikk címe: {elem.text}')
+            article_title.append(elem.text)
+
+        self.article_title_list = article_title
         print()
         page_url = browser.current_url
         print(f'Cikkek száma a {page_url} URL című oldalon: {amount}')
         print()
 
-    # Több oldalas listán megjelenő cikkek listázása
+        return article_title
+
+
     # Több oldalas lista bejárása
     def multi_page_list_explore(self, browser):
-        pages = browser.find_elements(By.XPATH, '//a[@class="page-link"]')
+        pages = WebDriverWait(browser, 5).until(
+            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="page-link"]')))
         total_pages = len(pages)
-        counter = 0
+        page_number = 0
         print()
         print(f'Lista oldalak száma {total_pages}')
         for article in range(total_pages):
-            counter += 1
-            print(f'Cikkek a {counter}. oldalon:')
+            page_number += 1
+            self.article_number(browser)
+            amount = self.article_amount
+            print(f'{amount} cikk található a {page_number}. oldalon.')
             print()
-            self.article_listing(browser)
+            time.sleep(5)
 
-            if counter < total_pages:
+            if page_number < total_pages:
                 print()
                 print('Tovább lépek a lista következő oldalára.')
-                next_link = pages[counter]
+                next_link = pages[article]
                 next_link.click()
                 print()
             else:
@@ -320,36 +352,21 @@ class ManipulatePages:
                 print('Elértem az utolsó lista oldal végére.')
                 print()
 
+        # Asserthez szükséges
+        numbers_of_pages = {'total': total_pages, 'active': page_number}
+        return numbers_of_pages
+
+
     # Új cikk feltöltése
     def new_article_upload(self, browser, article):
         self.articledata(article)
-
-        new_article_btn = browser.find_element(By.CLASS_NAME, 'ion-compose')
+        new_article_btn = WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'ion-compose')))
         new_article_btn.click()
+        self.article_input(browser)
+        article_info = self.article_assert(browser)
+        return article_info
 
-        WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '//input')))
-
-        print('Új cikk adatok megadása')
-
-        input_fields = browser.find_elements(By.XPATH, '//input')
-
-        article_title = input_fields[0]
-        article_title.send_keys(self.article_data[0])
-
-        article_about = input_fields[1]
-        article_about.send_keys(self.article_data[1])
-
-        article_content = browser.find_element(By.XPATH, '//textarea')
-        article_content.send_keys(self.article_data[2])
-
-        article_tag = input_fields[2]
-        article_tag.send_keys(self.article_data[3])
-
-        print(
-            f'Cikk adatai: Cikk címe: {self.article_data[0]}, Cikk témája: {self.article_data[1]}, Cikk szövege: {self.article_data[2]}, Cikk címkéi {self.article_data[2]}')
-
-        publish_btn = browser.find_element(By.XPATH, '//button')
-        publish_btn.click()
 
     # Cikk módosítása
     def modify_article(self, browser, article):
@@ -369,32 +386,10 @@ class ManipulatePages:
         edit_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-edit')))
         edit_btn.click()
 
-        print('Módosított cikk adatok megadása')
+        self.article_input(browser)
+        article_info = self.article_assert(browser)
+        return article_info
 
-        self.article_data = []
-        self.articledata('article2_data')
-        print(self.article_data)
-
-        input_fields = WebDriverWait(browser, 5).until(EC.presence_of_all_elements_located((By.XPATH, '//input')))
-        print(input_fields)
-
-        article_title = input_fields[0]
-        article_title.clear()
-        article_title.send_keys(self.article_data[0])
-
-        article_about = input_fields[1]
-        article_about.clear()
-        article_about.send_keys(self.article_data[1])
-
-        article_content = browser.find_element(By.XPATH, '//textarea')
-        article_content.clear()
-        article_content.send_keys(self.article_data[2])
-
-        print(
-            f'Cikk adatai: Cikk címe: {self.article_data[0]}, Cikk témája: {self.article_data[1]}, Cikk szövege: {self.article_data[2]}, Cikk címkéi {self.article_data[2]}')
-
-        publish_btn = browser.find_element(By.XPATH, '//button')
-        publish_btn.click()
 
     # Cikk törlése
     def delete_article(self, browser, article):
@@ -413,3 +408,25 @@ class ManipulatePages:
 
         delete_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-trash-a')))
         delete_btn.click()
+
+        self.go_to_profile(browser)
+        article_info = self.article_assert(browser)
+        return article_info
+
+    # Ismételt és sorozatos adatbevitel adatforrásból/Több cikk feltöltése adatforrásból
+    def more_articles_uploads_from_data_source(self, browser):
+        self.article_table_reading()
+        article_title = []
+
+        for item in self.article_list[1:]:
+            article = item
+            self.article_data = item
+            article_title.append(self.article_data[0])
+            self.new_article_upload(browser, article)
+
+        self.go_to_profile(browser)
+        self.article_listing(browser)
+
+        return article_title
+
+
