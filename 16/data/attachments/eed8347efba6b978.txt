@@ -1,0 +1,13 @@
+
+ATC 06 - Több oldalas lista bejárása
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Lista oldalak száma 2
+11 cikk található a 1. oldalon.
+
+
+Tovább lépek a lista következő oldalára.
