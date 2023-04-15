@@ -215,7 +215,7 @@ class ManipulatePages:
     def article_input(self, browser):
         print('Cikk adatok megadása')
 
-        input_fields = WebDriverWait(browser, 5).until(EC.presence_of_all_elements_located((By.XPATH, '//input')))
+        input_fields = WebDriverWait(browser, 1).until(EC.presence_of_all_elements_located((By.XPATH, '//input')))
 
         article_title = input_fields[0]
         article_title.clear()
@@ -241,7 +241,7 @@ class ManipulatePages:
 
     # Cikk feltöltés/módosítás/törlés asserthez szükséges cikk adatok
     def article_assert(self, browser):
-        title = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '//h1')))
+        title = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.XPATH, '//h1')))
         title_data = self.article_data[0]
         article_data = {'title_elem': title, 'title': title_data}
         return article_data
@@ -274,7 +274,7 @@ class ManipulatePages:
 
     # Profil oldalra navigálás
     def go_to_profile(self, browser):
-        nav_links = WebDriverWait(browser, 5).until(
+        nav_links = WebDriverWait(browser, 1).until(
             EC.presence_of_all_elements_located((By.XPATH, '//nav/div/ul/li[@class="nav-item"]')))
         nav_links[3].click()
 
@@ -283,7 +283,7 @@ class ManipulatePages:
         self.articledata(article)
         article_data = self.article_data
         browser.refresh()
-        titles = WebDriverWait(browser, 5).until(
+        titles = WebDriverWait(browser, 1).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
 
         for title in titles:
@@ -301,8 +301,9 @@ class ManipulatePages:
         self.article_amount = len(title_list)
 
         for elem in title_list:
-            time.sleep(1)
+            # time.sleep(1)
             article_title.append(elem.text)
+            time.sleep(1)
 
         self.article_title_list = article_title
 
