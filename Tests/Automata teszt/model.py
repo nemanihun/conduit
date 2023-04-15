@@ -57,7 +57,7 @@ class GetUsers:
 
             # Registration Success Popup Ok button
 
-            ok_btn = WebDriverWait(browser, 5).until(
+            ok_btn = WebDriverWait(browser, 1).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
 
             ok_btn.click()
@@ -103,7 +103,7 @@ class GetUsers:
 
     def signup_ok_btn(self, browser):
 
-        return WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
+        return WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
 
 
 class Cookie:
@@ -168,7 +168,7 @@ class Cookie:
 
         cookie_accept_btn.click()
 
-        WebDriverWait(browser, 5).until_not(EC.presence_of_element_located((By.CLASS_NAME, 'cookie__bar__content')))
+        WebDriverWait(browser, 1).until_not(EC.presence_of_element_located((By.CLASS_NAME, 'cookie__bar__content')))
 
         cookie_content_list = browser.find_elements(By.CLASS_NAME, 'cookie__bar__content')
 
