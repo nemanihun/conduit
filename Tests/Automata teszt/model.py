@@ -100,11 +100,11 @@ class GetUsers:
     # A "Log out" gomb megtalálása
     def logout_btn(self, browser):
 
-        return WebDriverWait(browser, 15).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
+        return WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
 
     def signup_ok_btn(self, browser):
 
-        return WebDriverWait(browser, 15).until(EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
+        return WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
 
 
 class Cookie:
@@ -249,6 +249,7 @@ class ManipulatePages:
 
     # Cikk adat beolvasása CSV fáljból
     def article_table_reading(self, file, limit):
+        file = adatok.Articles.hirek_csv
         article_list = []
 
         with open(file, 'r', encoding='UTF-8') as file:
