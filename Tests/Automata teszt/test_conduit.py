@@ -2,13 +2,11 @@ import data as adatok
 import configuration as config
 import model as model
 import time
-
+import pytest
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-# from datetime import datetime, date, time, timezone
-from selenium.webdriver.support.ui import Select
+
 
 
 class TestConduit(object):
@@ -17,7 +15,7 @@ class TestConduit(object):
         self.browser = config.get_preconfigured_chrome_driver()
         self.browser.get(adatok.Urls.home_url)
         self.browser.maximize_window()
-        time.sleep(2)
+        time.sleep(10)
 
     def teardown_method(self):
         self.browser.quit()
@@ -126,11 +124,12 @@ class TestConduit(object):
         print('Elvárt eredmény: Legalább egy cikk van az oldalon.')
         print()
 
+        # Megvizsgálom, található-e legalább egy cikk az oldalon.
+
         # Kilistázom az oldalon található cikkek címét.
-        manipulatepages.article_listing(self.browser)
+        manipulatepages.article_list_function(self.browser)
         article_amount = manipulatepages.article_amount
 
-        # Megvizsgálom, található-e legalább egy cikk az oldalon.
         assert article_amount > 0
 
         print()
@@ -215,7 +214,7 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        article = 'article2_data'
+        article = 'article1_data'
 
         print()
         print('ATC 08 - Adat módosítása/Cikk módosítása')
@@ -250,7 +249,7 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
-        article = 'article2_data'
+        article = 'article3_data'
 
         print()
         print('ATC 09 - Adat törlése/Cikk törlése')
@@ -262,8 +261,11 @@ class TestConduit(object):
         # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
         getusers.logout_btn(self.browser)
 
-        # Törlök egy általam létrehozott cikket.
-        article_info = manipulatepages.delete_article(self.browser, 'article2_data')
+        # # Feltöltök egy cikket, amit utána kitörlök.
+        manipulatepages.new_article_upload(self.browser, article)
+
+        # Törlöm a létrehozott cikket.
+        article_info = manipulatepages.delete_article(self.browser, article)
         title_element = article_info['title_elem']
         title = article_info['title']
 
@@ -272,8 +274,10 @@ class TestConduit(object):
         print()
 
         # Megvizsgálom megtalálható-e a törölt cikk címe a lista oldalon.
-        for element in title_element:
-            assert title != element.text
+
+        with pytest.raises(Exception) as e:
+            deleted_article = WebDriverWait(self.browser, 2).until(
+                EC.presence_of_element_located((By.XPATH, f'//h1[text()="{title}"]')))
 
         print()
         print('Aktuális eredmény: A cikk törlése sikeres. A cikk már nem jelenik meg az oldalon.')
@@ -285,7 +289,7 @@ class TestConduit(object):
         getusers = model.GetUsers()
 
         print()
-        print('ATC 09 - Új adat bevitele')
+        print('ATC 10 - Ismételt és sorozatos adatbevitel adatforrásból/Cikkek feltöltése csv-ből')
         print()
 
         # Bejelentkezem az alkalmazásba.
@@ -294,11 +298,8 @@ class TestConduit(object):
         # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
         getusers.logout_btn(self.browser)
 
-        # Feltöltök egy új cikket.
-        article = manipulatepages.more_articles_uploads_from_data_source(self.browser)
-
-        # title_element = article_info['title_elem']
-        # title = article_info['title']
+        # Feltöltöm a cikkeket.
+        article = manipulatepages.more_articles_uploads_from_data_source(self.browser, 'hirek.csv')
 
         print()
         print('Elvárt eredmény: Az új cikkek feltöltése sikeres. A cikkek címe megjelenik az oldalon.')
@@ -307,9 +308,39 @@ class TestConduit(object):
         # Megvizsgálom, megjelennek-e a feltöltött cikkek az oldalon.
 
         for item in article:
-
             assert item in manipulatepages.article_title_list
 
         print()
         print('Aktuális eredmény: Megjelenik a feltöltött cikkek címe. A cikkek felvitele sikeres volt.')
+        print()
+
+    def test_data_download(self):
+        manipulatepages = model.ManipulatePages()
+
+        getusers = model.GetUsers()
+
+        print()
+        print('ATC 11 - Adatok lementése felületről/Cikkek címének lementése csv-be')
+        print()
+
+        # Bejelentkezem az alkalmazásba.
+        getusers.signin(self.browser, 'user4')
+
+        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        getusers.logout_btn(self.browser)
+
+        # Letöltöm a testuser1 felhasználó cikkeinek címét a weboldalról.
+        article = manipulatepages.article_download(self.browser, 'saved.csv')
+
+        print()
+        print(
+            'Elvárt eredmény: A cikkek címének lementése sikeres. A cikkek címe megtalálható a csv fileban. A lementendő cikk címek száma és a csv file-ban található cikkek száma megegyezik.')
+        print()
+
+        # Megvizsgálom, a lementedő cikkek száma megegyezik-e a csv file-ban található cikkek számával.
+
+        assert manipulatepages.article_amount == article
+
+        print()
+        print('Aktuális eredmény: A lementendő cikk címek száma és a csv file-ban található cikkek száma megegyezik.')
         print()

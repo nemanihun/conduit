@@ -20,15 +20,8 @@ class GetUsers:
             users = adatok.Users.user_data.values()
         if us == 'user2':
             users = adatok.Users.user2_data.values()
-        if us == 'bademail':
-            users = adatok.Users.bad_user_email.values()
-        if us == 'badpass':
-            users = adatok.Users.bad_user_password.values()
         if us == 'user4':
             users = adatok.Users.user4_data.values()
-        if us == 'user5':
-            users = adatok.Users.user5_data.values()
-
         for user in users:
             self.user_data.append(user)
 
@@ -209,8 +202,12 @@ class ManipulatePages:
             articles = adatok.Articles.article2_data.values()
         if adata == 'article3_data':
             articles = adatok.Articles.article3_data.values()
+        if adata == 'article4_data':
+            articles = adatok.Articles.article4_data.values()
         if adata == 'hirek_csv':
-            articles = self.article_data
+            articles = adatok.Articles.hirek_csv.values()
+        if adata == 'saved_csv':
+            articles = adatok.Articles.saved_csv.values()
         for article in articles:
             self.article_data.append(article)
         return articles
@@ -251,11 +248,11 @@ class ManipulatePages:
         return article_data
 
     # Cikk adat beolvasása CSV fáljból
-    def article_table_reading(self):
+    def article_table_reading(self, file, limit):
         article_list = []
 
-        with open('Tests/Automata teszt/hirek.csv', 'r', encoding='UTF-8') as file:
-            article_table = csv.reader(file, delimiter=';')
+        with open(file, 'r', encoding='UTF-8') as file:
+            article_table = csv.reader(file, delimiter=limit)
 
             for row in article_table:
                 article_list.append(row)
@@ -263,67 +260,77 @@ class ManipulatePages:
         self.article_list = article_list
         return article_list
 
+    # Adatok lementése csv fileba
+    def data_download_to_csv(self, file):
+        file = adatok.Articles.saved_csv
+        titles = self.article_title_list
+        print(titles)
+
+        with open(file, 'w', encoding='UTF-8', newline='') as title_list:
+            writer = csv.writer(title_list)
+            writer.writerows([titles])
+
+        return titles
 
     # Profil oldalra navigálás
     def go_to_profile(self, browser):
-        time.sleep(2)
-        nav_links = browser.find_elements(By.XPATH, '//nav/div/ul/li[@class="nav-item"]')
+        nav_links = WebDriverWait(browser, 5).until(
+            EC.presence_of_all_elements_located((By.XPATH, '//nav/div/ul/li[@class="nav-item"]')))
         nav_links[3].click()
-        time.sleep(60)
-
-
-    # Cikkek száma a lista oldalon
-    def article_number(self, browser):
-        article_list = browser.find_elements(By.CLASS_NAME, 'article-preview')
-        self.article_list = article_list
-        article_number = len(article_list)
-        self.article_amount = article_number
-
-        return article_number
-
 
     # Egy konkrét cikk megtalálása és megnyitása
     def find_article(self, browser, article):
         self.articledata(article)
         article_data = self.article_data
+        browser.refresh()
         titles = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
 
         for title in titles:
-
+            time.sleep(1)
             if title.text == article_data[0]:
                 title.click()
+                time.sleep(1)
 
+    # Cikkek listájának összegyűjtése
+    def article_listing(self, browser):
+        article_title = []
+        browser.refresh()
+        title_list = WebDriverWait(browser, 5).until(
+            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
+        self.article_amount = len(title_list)
+
+        for elem in title_list:
+            time.sleep(1)
+            article_title.append(elem.text)
+
+        self.article_title_list = article_title
+
+        return article_title
 
     # Tesztesetek funkciói
 
     # Cikkek listázása
-    def article_listing(self, browser):
-        time.sleep(5)
-        self.article_number(browser)
-        amount = self.article_amount
-        counter = 0
-        article_title = []
-        title_list = WebDriverWait(browser, 5).until(EC.presence_of_all_elements_located((By.XPATH, '//h1')))
+    def article_list_function(self, browser):
+        amount = 0
+        title_list = self.article_listing(browser)
+
         print()
         print('Kilistázom a cikkek címét')
         print()
         print('Az oldalon megjelenő cikkek címei:')
         print()
 
-        for elem in title_list[1:]:
-            counter += 1
-            print(f'{counter}. Cikk címe: {elem.text}')
-            article_title.append(elem.text)
+        for title in title_list[1:]:
+            amount += 1
+            print(f'{amount}. Cikk címe: {title}')
 
-        self.article_title_list = article_title
         print()
         page_url = browser.current_url
         print(f'Cikkek száma a {page_url} URL című oldalon: {amount}')
         print()
 
-        return article_title
-
+        return self.article_title_list
 
     # Több oldalas lista bejárása
     def multi_page_list_explore(self, browser):
@@ -335,11 +342,11 @@ class ManipulatePages:
         print(f'Lista oldalak száma {total_pages}')
         for article in range(total_pages):
             page_number += 1
-            self.article_number(browser)
+            self.article_listing(browser)
             amount = self.article_amount
             print(f'{amount} cikk található a {page_number}. oldalon.')
             print()
-            time.sleep(5)
+            time.sleep(1)
 
             if page_number < total_pages:
                 print()
@@ -356,7 +363,6 @@ class ManipulatePages:
         numbers_of_pages = {'total': total_pages, 'active': page_number}
         return numbers_of_pages
 
-
     # Új cikk feltöltése
     def new_article_upload(self, browser, article):
         self.articledata(article)
@@ -367,11 +373,9 @@ class ManipulatePages:
         article_info = self.article_assert(browser)
         return article_info
 
-
     # Cikk módosítása
     def modify_article(self, browser, article):
         self.articledata(article)
-
         self.go_to_profile(browser)
 
         print()
@@ -390,12 +394,11 @@ class ManipulatePages:
         article_info = self.article_assert(browser)
         return article_info
 
-
     # Cikk törlése
     def delete_article(self, browser, article):
         self.articledata(article)
-
         self.go_to_profile(browser)
+        time.sleep(1)
 
         print()
         print('Megkeresem a törlendő cikket.')
@@ -414,8 +417,8 @@ class ManipulatePages:
         return article_info
 
     # Ismételt és sorozatos adatbevitel adatforrásból/Több cikk feltöltése adatforrásból
-    def more_articles_uploads_from_data_source(self, browser):
-        self.article_table_reading()
+    def more_articles_uploads_from_data_source(self, browser, file):
+        self.article_table_reading(file, ';')
         article_title = []
 
         for item in self.article_list[1:]:
@@ -429,4 +432,40 @@ class ManipulatePages:
 
         return article_title
 
+    def article_download(self, browser, file):
+        user_link = WebDriverWait(browser, 5).until(
+            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="author"]')))
+        print(user_link[0].text)
+        user_link[0].click()
+        time.sleep(1)
+        self.article_listing(browser)
+        print(self.article_title_list)
+        browser.refresh()
+        time.sleep(1)
+        self.data_download_to_csv(file)
+        titles = self.article_table_reading(file, ',')
+        print(titles)
 
+        article_titles = []
+
+        for title in titles:
+            article_titles.append(title)
+
+        print(article_titles)
+
+        amount = 0
+
+        print()
+        print('Kilistázom a lementett cikkek címét:')
+        print()
+
+        for title in article_titles:
+            for item in title:
+                amount += 1
+                print(f'{amount}. Cikk címe: {item}')
+
+        print()
+        print(f'Cikkek száma a lementett file-ban: {amount}')
+        print()
+
+        return amount
