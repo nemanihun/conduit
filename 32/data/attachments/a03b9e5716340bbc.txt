@@ -1,0 +1,25 @@
+
+ATC 11 - Adatok lementése felületről/Cikkek címének lementése csv-be
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+['Lorem ipsum dolor sit amet', 'Urna nunc id cursus metus.', 'Egestas egestas', 'Nibh praesent tristique magna', 'Nunc lobortis mattis aliquam']
+
+Kilistázom a lementett cikkek címét:
+
+1. Cikk címe: Lorem ipsum dolor sit amet
+2. Cikk címe: Urna nunc id cursus metus.
+3. Cikk címe: Egestas egestas
+4. Cikk címe: Nibh praesent tristique magna
+5. Cikk címe: Nunc lobortis mattis aliquam
+
+Cikkek száma a lementett file-ban: 5
+
+
+Elvárt eredmény: A cikkek címének lementése sikeres. A cikkek címe megtalálható a csv fileban. A lementendő cikk címek száma és a csv file-ban található cikkek száma megegyezik.
+
+
+Aktuális eredmény: A lementendő cikk címek száma és a csv file-ban található cikkek száma megegyezik.
+
