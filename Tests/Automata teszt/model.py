@@ -301,7 +301,7 @@ class ManipulatePages:
         article_title = []
         browser.refresh()
         title_list = WebDriverWait(browser, 5).until(
-            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
+            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]/h1')))
         self.article_amount = len(title_list)
 
         for elem in title_list:
@@ -360,10 +360,10 @@ class ManipulatePages:
                 print()
                 print('Tovább lépek a lista következő oldalára.')
                 next_link = pages[article]
-                next_link.click()
-                time.sleep(1)
                 browser.refresh()
                 time.sleep(1)
+                next_link.click()
+
                 print()
             else:
                 print()
@@ -408,6 +408,7 @@ class ManipulatePages:
     # Cikk törlése
     def delete_article(self, browser, article):
         self.articledata(article)
+        time.sleep(1)
         self.go_to_profile(browser)
         time.sleep(1)
 
