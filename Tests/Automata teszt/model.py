@@ -339,23 +339,15 @@ class ManipulatePages:
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="page-link"]')))
         total_pages = len(pages)
         page_number = 0
-        print()
-        print(f'Lista oldalak száma {total_pages}')
 
         for article in range(total_pages):
             page_number += 1
 
             if page_number < total_pages:
-                print()
-                print(f'Tovább lépek a lista {page_number + 1}. oldalára.')
+
                 next_link = pages[article]
                 next_link.click()
                 time.sleep(1)
-                print()
-            else:
-                print()
-                print(f'Elértem az utolsó lista oldalra, a {page_number + 1}. oldalra.')
-                print()
 
         # Asserthez szükséges
         numbers_of_pages = {'total': total_pages, 'active': page_number}
