@@ -418,7 +418,7 @@ class ManipulatePages:
         print('Rákattintok az "Delete article" törlés gombra')
         print()
         time.sleep(2)
-        delete_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-trash-a')))
+        delete_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '//button[@class="btn btn-outline-danger btn-sm"]')))
         delete_btn.click()
 
         self.go_to_profile(browser)
