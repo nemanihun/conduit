@@ -286,9 +286,9 @@ class ManipulatePages:
     def find_article(self, browser, article):
         self.articledata(article)
         article_data = self.article_data
-        browser.refresh()
         titles = WebDriverWait(browser, 3).until(
             EC.presence_of_all_elements_located((By.XPATH, '//h1')))
+        browser.refresh()
 
         for title in titles:
             time.sleep(1)
@@ -299,16 +299,16 @@ class ManipulatePages:
     # Cikkek listájának összegyűjtése
     def article_listing(self, browser):
         article_title = []
-        browser.refresh()
-        title_list = WebDriverWait(browser, 15).until(
-            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]/h1')))
+        time.sleep(2)
+        title_list = WebDriverWait(browser, 5).until(
+            EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
         self.article_amount = len(title_list)
+        time.sleep(2)
 
         for elem in title_list:
-            time.sleep(1)
             article_title.append(elem.text)
+            time.sleep(1)
 
-        time.sleep(3)
         self.article_title_list = article_title
 
         return article_title
@@ -339,7 +339,10 @@ class ManipulatePages:
 
     # Több oldalas lista bejárása
     def multi_page_list_explore(self, browser):
-        pages = WebDriverWait(browser, 1).until(
+        time.sleep(3)
+        browser.refresh()
+        time.sleep(1)
+        pages = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="page-link"]')))
         total_pages = len(pages)
         page_number = 0
@@ -348,21 +351,19 @@ class ManipulatePages:
 
         for article in range(total_pages):
             page_number += 1
-            self.article_listing(browser)
-            amount = self.article_amount
-            print(f'{amount} cikk található a {page_number}. oldalon.')
-            print()
-            time.sleep(1)
+            #     browser.refresh()
+            #     self.article_listing(browser)
+            #     amount = self.article_amount
+            #     print(f'{amount} cikk található a {page_number}. oldalon.')
+            #     print()
+            #     time.sleep(1)
 
             if page_number < total_pages:
-                browser.refresh()
-                time.sleep(1)
                 print()
-                print('Tovább lépek a lista következő oldalára.')
+                print(f'Tovább lépek a lista {page_number}. oldalára.')
                 next_link = pages[article]
-                time.sleep(1)
                 next_link.click()
-
+                time.sleep(1)
                 print()
             else:
                 print()
@@ -438,7 +439,8 @@ class ManipulatePages:
             self.article_data = item
             article_title.append(self.article_data[0])
             self.new_article_upload(browser, article)
-
+        browser.refresh()
+        time.sleep(2)
         self.go_to_profile(browser)
         time.sleep(1)
         browser.refresh()
