@@ -435,6 +435,7 @@ class ManipulatePages:
             self.new_article_upload(browser, article)
 
         self.go_to_profile(browser)
+        browser.refresh()
         self.article_listing(browser)
 
         return article_title
