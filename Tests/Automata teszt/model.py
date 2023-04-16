@@ -85,6 +85,9 @@ class GetUsers:
 
         submit_btn = browser.find_element(By.XPATH, '//button')
         submit_btn.click()
+        time.sleep(1)
+        browser.refresh()
+        time.sleep(1)
 
     # Kijelentkezés
     def logout(self, browser):
@@ -300,6 +303,7 @@ class ManipulatePages:
         title_list = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
         self.article_amount = len(title_list)
+        browser.refresh()
         print(title_list)
         for elem in title_list:
             # time.sleep(1)
@@ -316,7 +320,7 @@ class ManipulatePages:
     def article_list_function(self, browser):
         amount = 0
         title_list = self.article_listing(browser)
-
+        browser.refresh()
         print()
         print('Kilistázom a cikkek címét')
         print()
@@ -342,6 +346,7 @@ class ManipulatePages:
         page_number = 0
         print()
         print(f'Lista oldalak száma {total_pages}')
+        browser.refresh()
         for article in range(total_pages):
             page_number += 1
             self.article_listing(browser)
@@ -405,7 +410,7 @@ class ManipulatePages:
         print()
         print('Megkeresem a törlendő cikket.')
         print()
-
+        browser.refresh()
         self.find_article(browser, article)
 
         print('Rákattintok az "Delete article" törlés gombra')
@@ -428,7 +433,7 @@ class ManipulatePages:
             self.article_data = item
             article_title.append(self.article_data[0])
             self.new_article_upload(browser, article)
-
+        browser.refresh()
         self.go_to_profile(browser)
         self.article_listing(browser)
 
@@ -445,7 +450,7 @@ class ManipulatePages:
         self.data_download_to_csv(file)
         titles = self.article_table_reading(file, ',')
         article_titles = []
-
+        browser.refresh()
         for title in titles:
             article_titles.append(title)
 
