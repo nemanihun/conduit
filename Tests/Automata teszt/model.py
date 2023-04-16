@@ -335,7 +335,7 @@ class ManipulatePages:
 
     # Több oldalas lista bejárása
     def multi_page_list_explore(self, browser):
-        pages = WebDriverWait(browser, 5).until(
+        pages = WebDriverWait(browser, 1).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="page-link"]')))
         total_pages = len(pages)
         page_number = 0
@@ -367,7 +367,7 @@ class ManipulatePages:
     # Új cikk feltöltése
     def new_article_upload(self, browser, article):
         self.articledata(article)
-        new_article_btn = WebDriverWait(browser, 5).until(
+        new_article_btn = WebDriverWait(browser, 1).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'ion-compose')))
         new_article_btn.click()
         self.article_input(browser)
@@ -388,7 +388,7 @@ class ManipulatePages:
         print('Rákattintok az "Edit article" szerkesztés gombra')
         print()
 
-        edit_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-edit')))
+        edit_btn = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-edit')))
         edit_btn.click()
 
         self.article_input(browser)
@@ -410,7 +410,7 @@ class ManipulatePages:
         print('Rákattintok az "Delete article" törlés gombra')
         print()
 
-        delete_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-trash-a')))
+        delete_btn = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-trash-a')))
         delete_btn.click()
 
         self.go_to_profile(browser)
@@ -434,13 +434,13 @@ class ManipulatePages:
         return article_title
 
     def article_download(self, browser, file):
-        user_link = WebDriverWait(browser, 5).until(
+        user_link = WebDriverWait(browser, 1).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="author"]')))
         user_link[0].click()
         time.sleep(1)
         self.article_listing(browser)
         browser.refresh()
-        time.sleep(1)
+        # time.sleep(1)
         self.data_download_to_csv(file)
         titles = self.article_table_reading(file, ',')
         article_titles = []
