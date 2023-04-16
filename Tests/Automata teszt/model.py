@@ -287,8 +287,8 @@ class ManipulatePages:
     def find_article(self, browser, article):
         self.articledata(article)
         article_data = self.article_data
-
-        titles = WebDriverWait(browser, 1).until(
+        browser.refresh()
+        titles = WebDriverWait(browser, 3).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
 
         for title in titles:
@@ -300,12 +300,13 @@ class ManipulatePages:
     # Cikkek listájának összegyűjtése
     def article_listing(self, browser):
         article_title = []
-
+        browser.refresh()
         title_list = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
         self.article_amount = len(title_list)
 
         for elem in title_list:
+            time.sleep(1)
             article_title.append(elem.text)
 
         time.sleep(3)
