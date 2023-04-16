@@ -324,7 +324,7 @@ class TestConduit(object):
         print()
 
         # Bejelentkezem az alkalmazásba.
-        getusers.signin(self.browser, 'user4')
+        getusers.signin(self.browser, 'user1')
         time.sleep(5)
         # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
         getusers.logout_btn(self.browser)
