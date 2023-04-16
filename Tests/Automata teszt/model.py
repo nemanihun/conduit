@@ -102,7 +102,8 @@ class GetUsers:
 
     # A "Log out" gomb megtalálása
     def logout_btn(self, browser):
-        return WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, "//i[@class='ion-android-exit']")))
+        return WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.XPATH, "//i[@class='ion-android-exit']")))
 
     def signup_ok_btn(self, browser):
 
@@ -299,16 +300,14 @@ class ManipulatePages:
     # Cikkek listájának összegyűjtése
     def article_listing(self, browser):
         article_title = []
-        
+
         title_list = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
         self.article_amount = len(title_list)
-        browser.refresh()
-        print(title_list)
+
         for elem in title_list:
-            # time.sleep(1)
             article_title.append(elem.text)
-            # time.sleep(1)
+
         time.sleep(3)
         self.article_title_list = article_title
 
@@ -444,12 +443,13 @@ class ManipulatePages:
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="author"]')))
         user_link[0].click()
         time.sleep(1)
+
         self.article_listing(browser)
-        browser.refresh()
-        # time.sleep(1)
         self.data_download_to_csv(file)
         titles = self.article_table_reading(file, ',')
+
         article_titles = []
+
         for title in titles:
             article_titles.append(title)
 
