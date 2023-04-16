@@ -252,7 +252,7 @@ class ManipulatePages:
 
     # Cikk adat beolvasása CSV fáljból
     def article_table_reading(self, file, limit):
-        file = adatok.Articles.hirek_csv
+
         article_list = []
 
         with open(file, 'r', encoding='UTF-8') as file:
@@ -266,7 +266,6 @@ class ManipulatePages:
 
     # Adatok lementése csv fileba
     def data_download_to_csv(self, file):
-        file = adatok.Articles.saved_csv
         titles = self.article_title_list
         print(titles)
 
@@ -410,7 +409,8 @@ class ManipulatePages:
         print()
         print('Megkeresem a törlendő cikket.')
         print()
-
+        browser.refresh()
+        time.sleep(1)
         self.find_article(browser, article)
 
         print('Rákattintok az "Delete article" törlés gombra')
@@ -435,7 +435,9 @@ class ManipulatePages:
             self.new_article_upload(browser, article)
 
         self.go_to_profile(browser)
+        time.sleep(1)
         browser.refresh()
+        time.sleep(1)
         self.article_listing(browser)
 
         return article_title

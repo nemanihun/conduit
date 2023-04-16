@@ -288,6 +288,8 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
+        file = adatok.Articles.hirek_csv
+
         print()
         print('ATC 10 - Ismételt és sorozatos adatbevitel adatforrásból/Cikkek feltöltése csv-ből')
         print()
@@ -299,7 +301,7 @@ class TestConduit(object):
         getusers.logout_btn(self.browser)
 
         # Feltöltöm a cikkeket.
-        article = manipulatepages.more_articles_uploads_from_data_source(self.browser, 'hirek.csv')
+        article = manipulatepages.more_articles_uploads_from_data_source(self.browser, file)
 
         print()
         print('Elvárt eredmény: Az új cikkek feltöltése sikeres. A cikkek címe megjelenik az oldalon.')
@@ -319,6 +321,8 @@ class TestConduit(object):
 
         getusers = model.GetUsers()
 
+        file = adatok.Articles.saved_csv
+
         print()
         print('ATC 11 - Adatok lementése felületről/Cikkek címének lementése csv-be')
         print()
@@ -330,7 +334,7 @@ class TestConduit(object):
         getusers.logout_btn(self.browser)
 
         # Letöltöm a testuser1 felhasználó cikkeinek címét a weboldalról.
-        article = manipulatepages.article_download(self.browser, 'saved.csv')
+        article = manipulatepages.article_download(self.browser, file)
 
         print()
         print(
