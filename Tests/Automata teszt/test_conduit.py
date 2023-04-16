@@ -1,7 +1,7 @@
 import data as adatok
 import configuration as config
 import model as model
-import pytest
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -272,9 +272,12 @@ class TestConduit(object):
 
         # Megvizsgálom megtalálható-e a törölt cikk címe a lista oldalon.
 
-        with pytest.raises(Exception) as e:
+        try:
             deleted_article = WebDriverWait(self.browser, 2).until(
                 EC.presence_of_element_located((By.XPATH, f'//h1[text()="{title}"]')))
+            assert False
+        except Exception as e:
+            assert True
 
         print()
         print('Aktuális eredmény: A cikk törlése sikeres. A cikk már nem jelenik meg az oldalon.')
@@ -322,7 +325,7 @@ class TestConduit(object):
 
         # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user4')
-
+        time.sleep(5)
         # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
         getusers.logout_btn(self.browser)
 
