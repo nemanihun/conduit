@@ -1,0 +1,32 @@
+
+ATC 05 - Adatok listázása
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Elvárt eredmény: Legalább egy cikk van az oldalon.
+
+[<selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="16b78069-0357-450c-b792-1b0f4454177f")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="6e6dfefd-9157-4b12-a6d0-6649619d9312")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="d7698304-4bf5-43ba-8814-03d7baa31270")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="8fb39e95-1dbc-499d-bfd5-90e92d18dbf9")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="41313642-7a0a-458d-bd2d-bf32761adc74")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="60f3d1a9-d141-40a7-8d29-ecbdc720c72d")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="6aec7033-0ae0-49ab-9a42-e40a44d7c269")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="2c41f4fb-e432-4fe5-8399-98316dce78bf")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="2fca8901-8224-4419-9a33-8cceda73408d")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="b0e7fd5b-9da6-46a9-aa47-1a590b13dad7")>, <selenium.webdriver.remote.webelement.WebElement (session="b9d92c69b50562df59ab756514fb17d1", element="38fb4859-0745-41d9-bc81-bd91b5eb300b")>]
+
+Kilistázom a cikkek címét
+
+Az oldalon megjelenő cikkek címei:
+
+1. Cikk címe: In nisl nisi scelerisque eu
+2. Cikk címe: Urna nunc id cursus metus.
+3. Cikk címe: Egestas egestas
+4. Cikk címe: Laoreet suspendisse interdum
+5. Cikk címe: Nibh praesent tristique magna
+6. Cikk címe: Eget mi proin sed libero
+7. Cikk címe: Nunc lobortis mattis aliquam
+8. Cikk címe: Cras sed felis eget velit
+9. Cikk címe: Elementum facilisis leo vel fringilla
+10. Cikk címe: Mi eget mauris pharetra et
+
+Cikkek száma a http://localhost:1667/#/ URL című oldalon: 10
+
+
+Aktuális eredmény: Található cikk az oldalon.
+
