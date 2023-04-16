@@ -99,11 +99,7 @@ class GetUsers:
 
     # A "Log out" gomb megtalálása
     def logout_btn(self, browser):
-        # return WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, "//i[@class='ion-android-exit']")))
-        nav_links = WebDriverWait(browser, 1).until(
-            EC.presence_of_all_elements_located((By.XPATH, '//nav/div/ul/li[@class="nav-item"]')))
-        if len(nav_links) == 5:
-            return nav_links
+        return WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, "//i[@class='ion-android-exit']")))
 
     def signup_ok_btn(self, browser):
 
