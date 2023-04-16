@@ -1,0 +1,23 @@
+
+ATC 06 - Több oldalas lista bejárása
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+
+Lista oldalak száma 2
+
+Tovább lépek a lista 2. oldalára.
+
+
+Elértem az utolsó lista oldalra, a 3. oldalra.
+
+
+Elvárt eredmény: Végig lépegetve az oldalakon, elérek a lista utolsó oldaláig.
+
+Összes oldal száma: 2 / aktív oldal száma: 2
+
+Aktuális eredmény: Végig tudtam lépegetni a lista összes oldalán és elértem az utolsó oldalig.
+
