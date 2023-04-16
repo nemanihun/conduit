@@ -1,0 +1,28 @@
+
+ATC 06 - Több oldalas lista bejárása
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Lista oldalak száma 2
+[<selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="41b25e22-8021-4647-a3f9-ffd6ab635dc3")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="f254f9f6-1c6c-4ce3-92aa-92bb72ee18e8")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="1ac3e5f6-4ea5-4b72-bb93-f3a6ab756b37")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="dfc6ef41-fe68-4a77-a79b-d134358df6d4")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="f5cc21ce-0637-4df7-a89a-a524a244cdb2")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="61011036-0f20-45e6-82de-65b9003e43e5")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="13ba2ab3-67c5-4c6d-87e3-30e93cefb98c")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="57f8c6d6-0c3f-4837-8c27-19a84c770db9")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="cf6009b7-8193-4b8c-9837-0e9c7fed52c5")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="3d90a6cb-b382-4627-8cf2-e6fa14edf3bf")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="1c078784-109f-4f58-93ce-6abccc35cb7e")>]
+11 cikk található a 1. oldalon.
+
+
+Tovább lépek a lista következő oldalára.
+
+[<selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="41b25e22-8021-4647-a3f9-ffd6ab635dc3")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="f254f9f6-1c6c-4ce3-92aa-92bb72ee18e8")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="1ac3e5f6-4ea5-4b72-bb93-f3a6ab756b37")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="dfc6ef41-fe68-4a77-a79b-d134358df6d4")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="f5cc21ce-0637-4df7-a89a-a524a244cdb2")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="61011036-0f20-45e6-82de-65b9003e43e5")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="13ba2ab3-67c5-4c6d-87e3-30e93cefb98c")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="57f8c6d6-0c3f-4837-8c27-19a84c770db9")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="cf6009b7-8193-4b8c-9837-0e9c7fed52c5")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="3d90a6cb-b382-4627-8cf2-e6fa14edf3bf")>, <selenium.webdriver.remote.webelement.WebElement (session="882cd2718afc210b68ac9bf911c072df", element="1c078784-109f-4f58-93ce-6abccc35cb7e")>]
+11 cikk található a 2. oldalon.
+
+
+Elértem az utolsó lista oldal végére.
+
+
+Elvárt eredmény: Végig lépegetve az oldalakon, elérek a lista utolsó oldaláig.
+
+Összes oldal száma: 2 / aktív oldal száma: 2
+
+Aktuális eredmény: Végig tudtam lépegetni a lista összes oldalán és elértem az utolsó oldalig.
+
