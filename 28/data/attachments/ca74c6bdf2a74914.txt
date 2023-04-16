@@ -1,0 +1,10 @@
+
+ATC 06 - Több oldalas lista bejárása
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+
+Lista oldalak száma 2
+[<selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="4cae0165-3ce4-472a-a4de-960d318d77d9")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="4e1255ff-036e-426b-880b-6885366b789d")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="afdebc2a-c194-440c-a054-64fa7e7716d5")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="10eb4dac-1c3f-493f-b115-290bed406e1a")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="0bd0316b-21a7-47f1-99dd-278eb8fd75d9")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="8e1cd9da-7c0d-45ab-8f8a-99c0faca1e45")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="40a66295-03f6-49da-8941-c8c059d34931")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="1a76350f-9a9e-47c2-bddc-4a2faaef81e4")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="7aba7863-1257-42df-bbff-c2cabe0c3fba")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="c462dd85-a62d-4e6a-8ee0-2d3a753ffd31")>, <selenium.webdriver.remote.webelement.WebElement (session="43550e66d7c794c7092081ecb28fa2e1", element="9c7c97a2-88a2-4a46-ae75-998461fae447")>]

@@ -1,0 +1,20 @@
+
+ATC 09 - Adat törlése/Cikk törlése
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+Cikk adatok megadása
+Cikk adatai: Cikk címe: Ez a 41. teszt cikk, Cikk témája: Ez egy újabb teszt cikk, Cikk szövege: Az ajtóra való alumínium rolós szúnyogháló amennyiben teljesen vissza van engedve az egyik oldalon elhelyezett alumínium tokba akkor szabad átjárást biztosít az erkélyajtón. Oldalra húzva és a mágnes segítségével rögzítve pedig tökéletes védelmet nyújt a kellemetlen szúnyogok ellen., Cikk címkéi Az ajtóra való alumínium rolós szúnyogháló amennyiben teljesen vissza van engedve az egyik oldalon elhelyezett alumínium tokba akkor szabad átjárást biztosít az erkélyajtón. Oldalra húzva és a mágnes segítségével rögzítve pedig tökéletes védelmet nyújt a kellemetlen szúnyogok ellen.
+
+Megkeresem a törlendő cikket.
+
+Rákattintok az "Delete article" törlés gombra
+
+
+Elvárt eredmény: A cikk törlése sikeres. A cikk nem jelenik már meg az oldalon.
+
+
+Aktuális eredmény: A cikk törlése sikeres. A cikk már nem jelenik meg az oldalon.
+
