@@ -1,0 +1,46 @@
+
+ATC 11 - Adatok lementése felületről/Cikkek címének lementése csv-be
+
+
+Bejelentkezem az alkalmazásba
+
+Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
+['Lorem ipsum dolor sit amet', 'Urna nunc id cursus metus.', 'Egestas egestas', 'Nibh praesent tristique magna', 'Nunc lobortis mattis aliquam']
+
+Kilistázom a lementett cikkek címét:
+
+1. Cikk címe: ﻿Article title;What this article about;Write your article;Enter tags
+2. Cikk címe: Debrecen 2030-ra az ipari termelés 16 százalékát fogja adni;Ez sokszorosa a tavalyi 2
+3. Cikk címe: 8 %-os részesedésnek.;A magyar vállalkozásoknak napról napra újabb kihívásokkal kell szembe nézniük
+4. Cikk címe:  az elmúlt néhány hónap mutatói alapján jól látható
+5. Cikk címe:  hogy nem kezdte túl jól az évet a magyar gazdaság. A Portfolio és a KAVOSZ országos rendezvénysorozatán dr. Parragh László a Magyar Kereskedelmi és Iparkamara elnöke
+6. Cikk címe:  Krisán László
+7. Cikk címe:  a KAVOSZ Zrt. vezérigazgatója és további szakemberek Debrecenben beszéltek arról
+8. Cikk címe:  hogyan tudnak lavírozni a nehezített pályán a kkv-k és milyen potenciális lehetőségeket rejtenek magukba ;debrecen
+9. Cikk címe:  ipar
+10. Cikk címe:  hir
+11. Cikk címe: Goldman Sachs: júniusban leállhat a kamatemelésekkel a Fed;Az infláció azonban továbbra is magas.;A Goldman Sachs elemzői a mai inflációs adatokat követően már úgy vélik
+12. Cikk címe:  hogy a Federal Reserve a májusi kamatdöntő ülést követően már júniusban leállhat a kamatemelésekkel. Az elemzők emellett azt is megjegyezték
+13. Cikk címe:  hogy amellett
+14. Cikk címe:  hogy fokozatosan mérséklődik az inflációs nyomás
+15. Cikk címe:  úgy tűnik
+16. Cikk címe:  hogy Silicon Valley Bank összeomlását követően a bankok magatartása is változott – írja a Reuters.;kamat
+17. Cikk címe:  fed
+18. Cikk címe:  hir
+19. Cikk címe: Emelkednek a tőzsdék a vártnál jobb inflációs adat után;A magyar tőzsdét azonban alaposan megütötték.;Magyar idő szerint délután 14 óra 30 perckor kerültek publikálásra Amerikában a legfrissebb
+20. Cikk címe:  márciusi fogyasztói árindex adatok
+21. Cikk címe:  az előző év azonos időszakához viszonyítva pedig a vártnál nagyobb mértékben csökkent az árnövekedés üteme. Az adatok publikálását követően emelkedtek a vezető részvényindexek Európában
+22. Cikk címe:  és Amerikában is szép pluszban voltak
+23. Cikk címe:  majd a zárás előtt nem sokkal lefordultak a tőzsdék
+24. Cikk címe:  miután a Fed közzétette legutóbbi
+25. Cikk címe:  márciusi ülésének jegyzőkönyvét
+26. Cikk címe:  melyből kiderült
+27. Cikk címe:  hogy a;inflation
+28. Cikk címe:  traiding
+29. Cikk címe:  hir
+
+Cikkek száma a lementett file-ban: 29
+
+
+Elvárt eredmény: A cikkek címének lementése sikeres. A cikkek címe megtalálható a csv fileban. A lementendő cikk címek száma és a csv file-ban található cikkek száma megegyezik.
+

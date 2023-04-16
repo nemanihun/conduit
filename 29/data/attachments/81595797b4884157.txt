@@ -1,8 +1,0 @@
-
-ATC 11 - Adatok lementése felületről/Cikkek címének lementése csv-be
-
-
-Bejelentkezem az alkalmazásba
-
-Megadom a bejelentkezési adatokat: Email cím: userteszt@gmail.com, Jelszó: Teszt2023#
-[<selenium.webdriver.remote.webelement.WebElement (session="a8335bca76f4c3e55c078d0a7522ad10", element="a3dee171-7c6c-413c-96a9-204a389b5921")>, <selenium.webdriver.remote.webelement.WebElement (session="a8335bca76f4c3e55c078d0a7522ad10", element="d3b41852-29c6-4011-b3d5-0701428fb138")>, <selenium.webdriver.remote.webelement.WebElement (session="a8335bca76f4c3e55c078d0a7522ad10", element="8a86721a-b1c0-43fd-8918-6b12e8a90ca9")>, <selenium.webdriver.remote.webelement.WebElement (session="a8335bca76f4c3e55c078d0a7522ad10", element="1af5a7a9-7bf1-4511-9f38-4f9c5cd73e54")>, <selenium.webdriver.remote.webelement.WebElement (session="a8335bca76f4c3e55c078d0a7522ad10", element="a2a90a37-b08e-4adb-971a-d49a834e3314")>]
