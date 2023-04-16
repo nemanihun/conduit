@@ -300,7 +300,7 @@ class ManipulatePages:
     def article_listing(self, browser):
         article_title = []
         browser.refresh()
-        title_list = WebDriverWait(browser, 5).until(
+        title_list = WebDriverWait(browser, 15).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]/h1')))
         self.article_amount = len(title_list)
 
@@ -360,7 +360,6 @@ class ManipulatePages:
                 print()
                 print('Tovább lépek a lista következő oldalára.')
                 next_link = pages[article]
-                browser.refresh()
                 time.sleep(1)
                 next_link.click()
 
