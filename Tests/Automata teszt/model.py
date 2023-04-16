@@ -50,19 +50,12 @@ class GetUsers:
         submit_btn = browser.find_element(By.XPATH, '//button')
         submit_btn.click()
 
-        logout_button = WebDriverWait(browser, 15).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'ion-android-exit')))
+        # Registration Success Popup Ok button
 
-        if logout_button.is_displayed():
+        ok_btn = WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
 
-            # Registration Success Popup Ok button
-
-            ok_btn = WebDriverWait(browser, 1).until(
-                EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
-
-            ok_btn.click()
-        else:
-            print('A regisztráció sikerült, de nem jelentkezett be az alkalmazás a folyamat végén.')
+        ok_btn.click()
 
     # Bejelentkezés
     def signin(self, browser, user):
@@ -107,7 +100,7 @@ class GetUsers:
 
     def signup_ok_btn(self, browser):
 
-        return WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
+        return WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'swal-button--confirm')))
 
 
 class Cookie:
@@ -172,7 +165,7 @@ class Cookie:
 
         cookie_accept_btn.click()
 
-        WebDriverWait(browser, 1).until_not(EC.presence_of_element_located((By.CLASS_NAME, 'cookie__bar__content')))
+        WebDriverWait(browser, 5).until_not(EC.presence_of_element_located((By.CLASS_NAME, 'cookie__bar__content')))
 
         cookie_content_list = browser.find_elements(By.CLASS_NAME, 'cookie__bar__content')
 
@@ -219,7 +212,7 @@ class ManipulatePages:
     def article_input(self, browser):
         print('Cikk adatok megadása')
 
-        input_fields = WebDriverWait(browser, 1).until(EC.presence_of_all_elements_located((By.XPATH, '//input')))
+        input_fields = WebDriverWait(browser, 5).until(EC.presence_of_all_elements_located((By.XPATH, '//input')))
 
         article_title = input_fields[0]
         article_title.clear()
@@ -245,7 +238,7 @@ class ManipulatePages:
 
     # Cikk feltöltés/módosítás/törlés asserthez szükséges cikk adatok
     def article_assert(self, browser):
-        title = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.XPATH, '//h1')))
+        title = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '//h1')))
         title_data = self.article_data[0]
         article_data = {'title_elem': title, 'title': title_data}
         return article_data
@@ -277,19 +270,19 @@ class ManipulatePages:
 
     # Profil oldalra navigálás
     def go_to_profile(self, browser):
-        nav_links = WebDriverWait(browser, 1).until(
-            EC.presence_of_all_elements_located((By.XPATH, '//nav/div/ul/li[@class="nav-item"]')))
+        nav_links = WebDriverWait(browser, 5).until(
+            EC.presence_of_all_elements_located(
+                (By.XPATH, '//ul[@class="nav navbar-nav pull-xs-right"]//li[@class="nav-item"]')))
         nav_links[3].click()
-        browser.refresh()
 
     # Egy konkrét cikk megtalálása és megnyitása
     def find_article(self, browser, article):
         self.articledata(article)
+        time.sleep(2)
         article_data = self.article_data
-        titles = WebDriverWait(browser, 3).until(
+        titles = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//h1')))
-        browser.refresh()
-
+        time.sleep(1)
         for title in titles:
             time.sleep(1)
             if title.text == article_data[0]:
@@ -377,7 +370,7 @@ class ManipulatePages:
     # Új cikk feltöltése
     def new_article_upload(self, browser, article):
         self.articledata(article)
-        new_article_btn = WebDriverWait(browser, 1).until(
+        new_article_btn = WebDriverWait(browser, 5).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'ion-compose')))
         new_article_btn.click()
         self.article_input(browser)
@@ -386,19 +379,22 @@ class ManipulatePages:
 
     # Cikk módosítása
     def modify_article(self, browser, article):
+        time.sleep(2)
         self.articledata(article)
+        time.sleep(2)
         self.go_to_profile(browser)
+        browser.refresh()
 
         print()
         print('Megkeresem a módosítandó cikket.')
         print()
-
+        time.sleep(2)
         self.find_article(browser, article)
 
         print('Rákattintok az "Edit article" szerkesztés gombra')
         print()
 
-        edit_btn = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-edit')))
+        edit_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-edit')))
         edit_btn.click()
 
         self.article_input(browser)
@@ -421,11 +417,12 @@ class ManipulatePages:
 
         print('Rákattintok az "Delete article" törlés gombra')
         print()
-
-        delete_btn = WebDriverWait(browser, 1).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-trash-a')))
+        time.sleep(2)
+        delete_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'ion-trash-a')))
         delete_btn.click()
 
         self.go_to_profile(browser)
+        browser.refresh()
         article_info = self.article_assert(browser)
         return article_info
 
@@ -439,8 +436,7 @@ class ManipulatePages:
             self.article_data = item
             article_title.append(self.article_data[0])
             self.new_article_upload(browser, article)
-        browser.refresh()
-        time.sleep(2)
+        time.sleep(3)
         self.go_to_profile(browser)
         time.sleep(1)
         browser.refresh()
@@ -450,7 +446,7 @@ class ManipulatePages:
         return article_title
 
     def article_download(self, browser, file):
-        user_link = WebDriverWait(browser, 1).until(
+        user_link = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="author"]')))
         user_link[0].click()
         time.sleep(1)
