@@ -35,11 +35,11 @@ class Articles:
         'Enter tags': 'test, lorem'
     }
 
-    # hirek_csv = 'Tests/Automata teszt/hirek.csv'
-    # saved_csv = 'Tests/Automata teszt/saved.csv'
+    hirek_csv = 'Tests/Automata teszt/hirek.csv'
+    saved_csv = 'Tests/Automata teszt/saved.csv'
 
-    hirek_csv = 'hirek.csv'
-    saved_csv = 'saved.csv'
+    # hirek_csv = 'hirek.csv'
+    # saved_csv = 'saved.csv'
 
 
 class Urls:

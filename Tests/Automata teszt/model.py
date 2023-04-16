@@ -338,7 +338,7 @@ class ManipulatePages:
         pages = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="page-link"]')))
         total_pages = len(pages)
-        page_number = 1
+        page_number = 0
         print()
         print(f'Lista oldalak száma {total_pages}')
 
@@ -347,14 +347,14 @@ class ManipulatePages:
 
             if page_number < total_pages:
                 print()
-                print(f'Tovább lépek a lista {page_number}. oldalára.')
+                print(f'Tovább lépek a lista {page_number + 1}. oldalára.')
                 next_link = pages[article]
                 next_link.click()
                 time.sleep(1)
                 print()
             else:
                 print()
-                print(f'Elértem az utolsó lista oldalra, a {page_number}. oldalra.')
+                print(f'Elértem az utolsó lista oldalra, a {page_number + 1}. oldalra.')
                 print()
 
         # Asserthez szükséges

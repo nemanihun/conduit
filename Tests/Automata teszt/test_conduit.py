@@ -15,7 +15,7 @@ class TestConduit(object):
         self.browser.get(adatok.Urls.home_url)
         self.browser.maximize_window()
 
-        self.browser.set_script_timeout(5)
+        # self.browser.set_script_timeout(5)
         time.sleep(2)
 
     def teardown_method(self):
