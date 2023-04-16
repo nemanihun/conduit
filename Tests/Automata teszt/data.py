@@ -5,18 +5,6 @@ class Users:
         'password': 'Teszt2023#'
     }
 
-    user2_data = {
-        'user': 'user2test20230313',
-        'email': 'user2@gmail.com',
-        'password': 'Teszt2023#'
-    }
-
-    user4_data = {
-        'user': 'user97test20230313',
-        'email': 'user97@gmail.com',
-        'password': 'Teszt2023#'
-    }
-
 
 class Articles:
     article1_data = {
@@ -27,31 +15,31 @@ class Articles:
     }
 
     article2_data = {
-        'Article title': 'Ez a 42. teszt cikk',
+        'Article title': 'Ez a 2. teszt cikk',
         'What this article about?': 'Ez egy újabb teszt cikk',
         'Write your article': 'Az ajtóra való alumínium rolós szúnyogháló amennyiben teljesen vissza van engedve az egyik oldalon elhelyezett alumínium tokba akkor szabad átjárást biztosít az erkélyajtón. Oldalra húzva és a mágnes segítségével rögzítve pedig tökéletes védelmet nyújt a kellemetlen szúnyogok ellen.',
         'Enter tags': 'cikk, new'
     }
 
     article3_data = {
-        'Article title': 'Ez a 41. teszt cikk',
+        'Article title': 'Ez a 3. teszt cikk',
         'What this article about?': 'Ez egy újabb teszt cikk',
         'Write your article': 'Az ajtóra való alumínium rolós szúnyogháló amennyiben teljesen vissza van engedve az egyik oldalon elhelyezett alumínium tokba akkor szabad átjárást biztosít az erkélyajtón. Oldalra húzva és a mágnes segítségével rögzítve pedig tökéletes védelmet nyújt a kellemetlen szúnyogok ellen.',
         'Enter tags': 'szúnyogháló, alumínium, erkélyajtó'
     }
 
     article4_data = {
-        'Article title': 'Ez a cikk, amit törölni fogok',
+        'Article title': 'Ezt a cikket ki kell törölni',
         'What this article about?': 'Ez egy törlendő cikk',
         'Write your article': 'Az ajtóra való alumínium rolós szúnyogháló amennyiben teljesen vissza van engedve az egyik oldalon elhelyezett alumínium tokba akkor szabad átjárást biztosít az erkélyajtón. Oldalra húzva és a mágnes segítségével rögzítve pedig tökéletes védelmet nyújt a kellemetlen szúnyogok ellen.',
         'Enter tags': 'test, lorem'
     }
 
-    hirek_csv = 'Tests/Automata teszt/hirek.csv'
-    saved_csv = 'Tests/Automata teszt/saved.csv'
+    # hirek_csv = 'Tests/Automata teszt/hirek.csv'
+    # saved_csv = 'Tests/Automata teszt/saved.csv'
 
-    # hirek_csv = 'hirek.csv'
-    # saved_csv = 'saved.csv'
+    hirek_csv = 'hirek.csv'
+    saved_csv = 'saved.csv'
 
 
 class Urls:

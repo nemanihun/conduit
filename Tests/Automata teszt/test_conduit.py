@@ -2,6 +2,7 @@ import data as adatok
 import configuration as config
 import model as model
 import time
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -14,14 +15,15 @@ class TestConduit(object):
         self.browser.get(adatok.Urls.home_url)
         self.browser.maximize_window()
 
-        # self.browser.implicitly_wait(5)
-        self.browser.set_script_timeout(6)
+        self.browser.set_script_timeout(5)
         time.sleep(2)
 
     def teardown_method(self):
         self.browser.quit()
 
     # ATC 01 - Regisztráció
+    @allure.id('ATC 01')
+    @allure.title('Regisztráció')
     def test_signup(self):
         getusers = model.GetUsers()
         print()
@@ -39,6 +41,8 @@ class TestConduit(object):
         print()
 
     # ATC 02 - Bejelentkezés
+    @allure.id('ATC 02')
+    @allure.title('Bejelentkezés')
     def test_signin(self):
         getusers = model.GetUsers()
 
@@ -59,6 +63,8 @@ class TestConduit(object):
         print()
 
     # ATC 03 - Kijelentkezés
+    @allure.id('ATC 03')
+    @allure.title('Kijelentkezés')
     def test_logout(self):
         getusers = model.GetUsers()
 
@@ -86,6 +92,8 @@ class TestConduit(object):
         print()
 
     # ATC 04 - Adatkezelési nyilatkozat használata
+    @allure.id('ATC 04')
+    @allure.title('Adatkezelési nyilatkozat használata')
     def test_cookie_handling(self):
         cookie = model.Cookie()
 
@@ -107,6 +115,8 @@ class TestConduit(object):
         # Aktuális eredményt a meghívott függvény írja ki.
 
     # ATC 05 - Adatok listázása
+    @allure.id('ATC 05')
+    @allure.title('Adatok listázása / Lista oldal cikkeinek kilistázása')
     def test_data_listing(self):
         manipulatepages = model.ManipulatePages()
 
@@ -129,6 +139,7 @@ class TestConduit(object):
 
         # Kilistázom az oldalon található cikkek címét.
         manipulatepages.article_list_function(self.browser)
+
         article_amount = manipulatepages.article_amount
 
         assert article_amount > 0
@@ -137,8 +148,9 @@ class TestConduit(object):
         print('Aktuális eredmény: Található cikk az oldalon.')
         print()
 
-        # ATC 06 - Több oldalas lista bejárása
-
+    # ATC 06 - Több oldalas lista bejárása
+    @allure.id('ATC 06')
+    @allure.title('Több oldalas lista bejárása')
     def test_multi_page_listing(self):
         manipulatepages = model.ManipulatePages()
 
@@ -154,7 +166,7 @@ class TestConduit(object):
         # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
         getusers.logout_btn(self.browser)
 
-        # Végig lépegetek a lista oldalain és kigyűjtöm, melyik oldalon hány cikk van.
+        # Végig lépegetek a lista oldalain.
         page_numbers = manipulatepages.multi_page_list_explore(self.browser)
         total_pages = page_numbers['total']
         active_page_nr = page_numbers['active']
@@ -172,8 +184,9 @@ class TestConduit(object):
         print('Aktuális eredmény: Végig tudtam lépegetni a lista összes oldalán és elértem az utolsó oldalig.')
         print()
 
-        # ATC 07 - Új adat bevitel / Új cikk feltöltése
-
+    # ATC 07 - Új adat bevitel / Új cikk feltöltése
+    @allure.id('ATC 07')
+    @allure.title('Új adat bevitel / Új cikk feltöltése')
     def test_new_data_upload(self):
         manipulatepages = model.ManipulatePages()
 
@@ -193,6 +206,7 @@ class TestConduit(object):
 
         # Feltöltök egy új cikket.
         article_info = manipulatepages.new_article_upload(self.browser, article)
+
         title_element = article_info['title_elem']
         title = article_info['title']
 
@@ -201,15 +215,15 @@ class TestConduit(object):
         print()
 
         # Megvizsgálom, megjelenik-e a feltöltött cikk az oldalon.
-        # asserts.article_assert(self.browser, article)
         assert title_element.text == title
 
         print()
         print('Aktuális eredmény: Megjelenik a cikk címe. A cikk felvitele sikeres volt.')
         print()
 
-        # ATC 08 - Adat módosítása / Cikk módosítása
-
+    # ATC 08 - Adat módosítása / Cikk módosítása
+    @allure.id('ATC 08')
+    @allure.title('Adat módosítása / Cikk módosítása')
     def test_modify_data(self):
         manipulatepages = model.ManipulatePages()
 
@@ -243,8 +257,9 @@ class TestConduit(object):
         print('Aktuális eredmény: Megjelenik a módosított cikk címe. A cikk módosítása sikeres volt.')
         print()
 
-        # ATC 09 - Adat törlése / Cikk törlése
-
+    # ATC 09 - Adat törlése / Cikk törlése
+    @allure.id('ATC 09')
+    @allure.title('Adat törlése / Cikk törlése')
     def test_delete_data(self):
         manipulatepages = model.ManipulatePages()
 
@@ -287,6 +302,9 @@ class TestConduit(object):
         print('Aktuális eredmény: A cikk törlése sikeres. A cikk már nem jelenik meg az oldalon.')
         print()
 
+    # ATC 10 - Adat törlése / Cikk törlése
+    @allure.id('ATC 10')
+    @allure.title('Ismételt és sorozatos adatbevitel adatforrásból/Cikkek feltöltése csv-ből')
     def test_more_articles_uploads(self):
         manipulatepages = model.ManipulatePages()
 
@@ -320,6 +338,9 @@ class TestConduit(object):
         print('Aktuális eredmény: Megjelenik a feltöltött cikkek címe. A cikkek felvitele sikeres volt.')
         print()
 
+    # ATC 11 - Adatok lementése felületről/Cikkek címének lementése csv-be
+    @allure.id('ATC 10')
+    @allure.title('Adatok lementése felületről/Cikkek címének lementése csv-be')
     def test_data_download(self):
         manipulatepages = model.ManipulatePages()
 

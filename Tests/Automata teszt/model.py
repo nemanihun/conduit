@@ -18,10 +18,10 @@ class GetUsers:
 
         if us == 'user1':
             users = adatok.Users.user_data.values()
-        if us == 'user2':
-            users = adatok.Users.user2_data.values()
-        if us == 'user4':
-            users = adatok.Users.user4_data.values()
+        # if us == 'user2':
+        #     users = adatok.Users.user2_data.values()
+        # if us == 'user4':
+        #     users = adatok.Users.user4_data.values()
         for user in users:
             self.user_data.append(user)
 
@@ -75,6 +75,7 @@ class GetUsers:
         print('Bejelentkezem az alkalmazásba')
         print()
         print(f'Megadom a bejelentkezési adatokat: Email cím: {self.user_data[1]}, Jelszó: {self.user_data[2]}')
+        print()
 
         submit_btn = browser.find_element(By.XPATH, '//button')
         submit_btn.click()
@@ -260,7 +261,6 @@ class ManipulatePages:
     # Adatok lementése csv fileba
     def data_download_to_csv(self, file):
         titles = self.article_title_list
-        print(titles)
 
         with open(file, 'w', encoding='UTF-8', newline='') as title_list:
             writer = csv.writer(title_list)
@@ -338,18 +338,12 @@ class ManipulatePages:
         pages = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="page-link"]')))
         total_pages = len(pages)
-        page_number = 0
+        page_number = 1
         print()
         print(f'Lista oldalak száma {total_pages}')
 
         for article in range(total_pages):
             page_number += 1
-            #     browser.refresh()
-            #     self.article_listing(browser)
-            #     amount = self.article_amount
-            #     print(f'{amount} cikk található a {page_number}. oldalon.')
-            #     print()
-            #     time.sleep(1)
 
             if page_number < total_pages:
                 print()
@@ -360,7 +354,7 @@ class ManipulatePages:
                 print()
             else:
                 print()
-                print('Elértem az utolsó lista oldal végére.')
+                print(f'Elértem az utolsó lista oldalra, a {page_number}. oldalra.')
                 print()
 
         # Asserthez szükséges
@@ -418,7 +412,8 @@ class ManipulatePages:
         print('Rákattintok az "Delete article" törlés gombra')
         print()
         time.sleep(2)
-        delete_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '//button[@class="btn btn-outline-danger btn-sm"]')))
+        delete_btn = WebDriverWait(browser, 5).until(
+            EC.presence_of_element_located((By.XPATH, '//button[@class="btn btn-outline-danger btn-sm"]')))
         delete_btn.click()
 
         self.go_to_profile(browser)
