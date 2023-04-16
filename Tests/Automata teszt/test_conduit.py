@@ -1,12 +1,10 @@
 import data as adatok
 import configuration as config
 import model as model
-import time
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 
 
 class TestConduit(object):
@@ -15,7 +13,6 @@ class TestConduit(object):
         self.browser = config.get_preconfigured_chrome_driver()
         self.browser.get(adatok.Urls.home_url)
         self.browser.maximize_window()
-        time.sleep(10)
 
     def teardown_method(self):
         self.browser.quit()
@@ -117,8 +114,8 @@ class TestConduit(object):
 
         getusers.signin(self.browser, 'user1')
 
-        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
-        getusers.logout_btn(self.browser)
+        # # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        # getusers.logout_btn(self.browser)
 
         print()
         print('Elvárt eredmény: Legalább egy cikk van az oldalon.')
@@ -150,8 +147,8 @@ class TestConduit(object):
         # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
-        getusers.logout_btn(self.browser)
+        # # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        # getusers.logout_btn(self.browser)
 
         # Végig lépegetek a lista oldalain és kigyűjtöm, melyik oldalon hány cikk van.
         page_numbers = manipulatepages.multi_page_list_explore(self.browser)
@@ -187,8 +184,8 @@ class TestConduit(object):
         # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
-        getusers.logout_btn(self.browser)
+        # # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        # getusers.logout_btn(self.browser)
 
         # Feltöltök egy új cikket.
         article_info = manipulatepages.new_article_upload(self.browser, article)
@@ -223,8 +220,8 @@ class TestConduit(object):
         # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
-        getusers.logout_btn(self.browser)
+        # # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        # getusers.logout_btn(self.browser)
 
         # Módosítok egy általam felvitt cikket.
         article_info = manipulatepages.modify_article(self.browser, article)
@@ -258,8 +255,8 @@ class TestConduit(object):
         # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
-        getusers.logout_btn(self.browser)
+        # # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        # getusers.logout_btn(self.browser)
 
         # # Feltöltök egy cikket, amit utána kitörlök.
         manipulatepages.new_article_upload(self.browser, article)
@@ -295,8 +292,8 @@ class TestConduit(object):
         # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user1')
 
-        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
-        getusers.logout_btn(self.browser)
+        # # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        # getusers.logout_btn(self.browser)
 
         # Feltöltöm a cikkeket.
         article = manipulatepages.more_articles_uploads_from_data_source(self.browser, 'hirek.csv')
@@ -326,8 +323,8 @@ class TestConduit(object):
         # Bejelentkezem az alkalmazásba.
         getusers.signin(self.browser, 'user4')
 
-        # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
-        getusers.logout_btn(self.browser)
+        # # Megvárom, amíg megjelenik a "Log out" gomb az oldalon.
+        # getusers.logout_btn(self.browser)
 
         # Letöltöm a testuser1 felhasználó cikkeinek címét a weboldalról.
         article = manipulatepages.article_download(self.browser, 'saved.csv')

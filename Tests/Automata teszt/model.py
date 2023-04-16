@@ -277,6 +277,7 @@ class ManipulatePages:
         nav_links = WebDriverWait(browser, 1).until(
             EC.presence_of_all_elements_located((By.XPATH, '//nav/div/ul/li[@class="nav-item"]')))
         nav_links[3].click()
+        browser.refresh()
 
     # Egy konkrét cikk megtalálása és megnyitása
     def find_article(self, browser, article):
@@ -296,15 +297,15 @@ class ManipulatePages:
     def article_listing(self, browser):
         article_title = []
         
-        title_list = WebDriverWait(browser, 1).until(
+        title_list = WebDriverWait(browser, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, '//a[@class="preview-link"]//h1')))
         self.article_amount = len(title_list)
-
+        print(title_list)
         for elem in title_list:
             # time.sleep(1)
             article_title.append(elem.text)
-            time.sleep(1)
-
+            # time.sleep(1)
+        time.sleep(3)
         self.article_title_list = article_title
 
         return article_title
