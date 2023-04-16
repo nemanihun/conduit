@@ -1,7 +1,0 @@
-
-ATC 11 - Adatok lementése felületről/Cikkek címének lementése csv-be
-
-
-Bejelentkezem az alkalmazásba
-
-Megadom a bejelentkezési adatokat: Email cím: user97@gmail.com, Jelszó: Teszt2023#
