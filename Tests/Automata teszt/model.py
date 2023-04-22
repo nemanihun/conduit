@@ -344,7 +344,6 @@ class ManipulatePages:
             page_number += 1
 
             if page_number < total_pages:
-
                 next_link = pages[article]
                 next_link.click()
                 time.sleep(1)

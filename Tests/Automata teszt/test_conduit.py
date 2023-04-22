@@ -173,7 +173,8 @@ class TestConduit(object):
         print('Elvárt eredmény: Végig lépegetve az oldalakon, elérek a lista utolsó oldaláig.')
         print()
 
-        # Megvizsgálom, hogy az utolsó oldal száma megegyezik-e a lista összes oldalának mennyiségével. Ha a két szám megegyezik, eljutottam a lista utolsó oldalára.
+        # Megvizsgálom, hogy az utolsó oldal száma megegyezik-e a lista összes oldalának mennyiségével.
+        # Ha a két szám megegyezik, eljutottam a lista utolsó oldalára.
         assert active_page_nr == total_pages
 
         print(f'Összes oldal száma: {total_pages} / aktív oldal száma: {active_page_nr}')
@@ -280,7 +281,6 @@ class TestConduit(object):
 
         # Törlöm a létrehozott cikket.
         article_info = manipulatepages.delete_article(self.browser, article)
-        title_element = article_info['title_elem']
         title = article_info['title']
 
         print()
@@ -300,7 +300,7 @@ class TestConduit(object):
         print('Aktuális eredmény: A cikk törlése sikeres. A cikk már nem jelenik meg az oldalon.')
         print()
 
-    # ATC 10 - Adat törlése / Cikk törlése
+    # ATC 10 - Ismételt és sorozatos adatbevitel adatforrásból/Cikkek feltöltése csv-ből
     @allure.id('ATC 10')
     @allure.title('Ismételt és sorozatos adatbevitel adatforrásból/Cikkek feltöltése csv-ből')
     def test_more_articles_uploads(self):
